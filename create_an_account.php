@@ -7,7 +7,7 @@
     <title>Creating an account</title>
     <link href = "Happy Tails Hotel.css" rel="stylesheet">
     <link href="nav.css" rel="stylesheet">
-</head>
+</head>fd
 <body>
 <header>
     <nav>
