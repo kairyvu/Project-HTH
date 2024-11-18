@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Perk</title>
-    <link href = "Happy Tails Hotel.css" rel="stylesheet">
-    <link href="nav.css" rel="stylesheet">
+    <link href = "../Happy Tails Hotel.css" rel="stylesheet">
+    <link href="../nav.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -63,7 +63,7 @@ $perkid = $_POST['perk_id_perk'];
 
 //connection
 error_reporting(0);
-include 'signin.php';
+include '../credential/signin.php';
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error()); 
 }

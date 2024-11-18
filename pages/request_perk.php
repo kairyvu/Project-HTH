@@ -7,8 +7,8 @@ ob_start(); ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Perks</title>
-    <link href = "Happy Tails Hotel.css" rel="stylesheet">
-    <link href="nav.css" rel="stylesheet">
+    <link href = "../Happy Tails Hotel.css" rel="stylesheet">
+    <link href="../nav.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -66,7 +66,7 @@ $newPerk = $_POST['new_perk'];
 $reservationID = $_POST['reservation_id'];
 
 //connection
-include 'signin.php';
+include '../credential/signin.php';
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error()); 
 }
