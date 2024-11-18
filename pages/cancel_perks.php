@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cancel Pet's reservation</title>
-    <link href = "Happy Tails Hotel.css" rel="stylesheet">
-    <link href="nav.css" rel="stylesheet">
+    <title>Cancel Perks</title>
+    <link href = "../Happy Tails Hotel.css" rel="stylesheet">
+    <link href="../nav.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -25,10 +25,10 @@
 
 <form method='post'>
     <fieldset>
-        <legend>Cancel Pet's reservation</legend>
+        <legend>Cancel Perks</legend>
         <div class='form'>
-            <label for='cancel_reservation'>Reservation ID</label>
-            <input type='text' name='cancel_reservation' required> 
+            <label for='reservid_perk'>Pet Owner's Reservation ID</label>
+            <input type='text' name='reservid_perk' required> 
         </div>
 
         <div id="btn">
@@ -36,41 +36,46 @@
         </div>
     </fieldset>
 </form>
+
 <script>
-let button = document.getElementById('btn1');
+let button = document.getElementById("btn1");
 button.addEventListener('click', function(e) {
-    if (!confirm('You are about to CANCEL this reservation. Are you sure?')) {
+    if (!confirm('You are about to CANCEL perks for this reservation. Are you sure you want to do so?')) {
         e.preventDefault();
     }
 });
 </script>
 <?php
 error_reporting(0);
-$cancelReservation = $_POST['cancel_reservation'];
+$reservid = $_POST['reservid_perk'];
 
 //connection
-include 'signin.php';
+include '../credential/signin.php';
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error()); 
 }
 
+
 //sql
-$sql = 'SELECT stayid FROM reservation WHERE stayid = '.mysqli_real_escape_string($con, $cancelReservation);
+$sql = 'SELECT* FROM reservation WHERE stayid = '.mysqli_real_escape_string($con, $reservid);
 $result = mysqli_query($con, $sql);
-if (mysqli_num_rows($result) > 0) {
-
-    //remove in reservation table
-    $sql = 'DELETE FROM reservation WHERE stayid = '.mysqli_real_escape_string($con, $cancelReservation);
-    mysqli_query($con, $sql);
-
-    //remove in perk table
-    $sql = 'DELETE FROM perk WHERE stayid = '.mysqli_real_escape_string($con, $cancelReservation);
-    mysqli_query($con, $sql);
-    echo "<script type='text/javascript'>alert('Reservation and Perks are Deleted')</script>";
+if (mysqli_num_rows($result) == 0) {
+    echo "<script type='text/javascript'>alert('Reservation ID does not exist. Please check and re-enter your correct reservation ID')</script>";
 }
 
 else {
-    echo "<script type='text/javascript'>alert('Reservation ID does not exist. Please check and re-enter the correct Reservation ID')</script>";
+    $sql = 'SELECT* FROM perk WHERE stayid = '.mysqli_real_escape_string($con, $reservid);
+    $result = mysqli_query($con, $sql);
+    if (mysqli_num_rows($result) == 0) {
+        echo "<script type='text/javascript'>alert('Your reservation ID is correct but no perks were requested before. Fails to delete.')</script>";
+    }
+    
+    else {
+        $sql = 'DELETE FROM perk WHERE stayid = '.mysqli_real_escape_string($con, $reservid);
+        mysqli_query($con, $sql);
+        echo "<script type='text/javascript'>alert('Perks deleted')</script>";
+    }
+
 }
 
 ?>

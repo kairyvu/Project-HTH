@@ -5,7 +5,7 @@ ob_start();?>
 <head>
         <meta charset="utf-8">
         <title>Happy Tails Hotel</title>
-        <link href = "Happy Tails Hotel.css" rel="stylesheet">
+        <link href = "../Happy Tails Hotel.css" rel="stylesheet">
 </head>
 
 <body>
@@ -70,7 +70,7 @@ ob_start();?>
                     <a href="contact" target="_blank" style="margin-left: 30px">Contact</a>
                 </fieldset>
             </form>  
-            <script src="Happy Tails Hotel.js"></script>
+            <script src="../Happy Tails Hotel.js"></script>
         
 
 <?php
@@ -85,7 +85,7 @@ $_SESSION['password'] = $_POST['password'];
 $_SESSION['transaction'] = $_POST['transaction'];
 
 //connecting to server
-include 'signin.php';
+include '../credential/signin.php';
 if (!$con) {   
     die("Connection failed: " . mysqli_connect_error()); 
 } 
